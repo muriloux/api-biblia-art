@@ -1,0 +1,26 @@
+{
+  "name": "api-biblia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild --bundle src/index.ts --outdir=dist --format=cjs --platform=node",
+    "dev": "ts-node src/index.ts --transpile-only",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "esbuild": "^0.17.19",
+    "fastify": "^4.17.0",
+    "sharp": "^0.32.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
