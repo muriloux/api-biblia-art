@@ -35,20 +35,21 @@ export default class GenRandomImgService {
       image.metadata().then((metadata) => {
         const { width, height, space }: sharp.Metadata = metadata;
 
+        const svgTextTemplate = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+          <text x="50%" y="50%" text-anchor="middle" font-family="Arial" 
+          font-size="${(width as number) / 10}" fill="black">
+            ${this.text}
+          </text>
+        </svg>
+        `;
+
         image
           .ensureAlpha()
           .toColorspace(space === "srgb" ? "srgb" : "rgb")
           .composite([
             {
-              input: Buffer.from(`
-            <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
-            <text x="50%" y="50%" text-anchor="middle" font-family="Arial" font-size="${
-              (width as number) / 10
-            }" fill="black">
-            ${this.text}
-            </text>
-            </svg>
-            `),
+              input: Buffer.from(svgTextTemplate),
               blend: "over",
             },
           ])
