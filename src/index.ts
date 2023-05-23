@@ -11,5 +11,5 @@ app.listen({ port: 3000 }, (err, address) => {
     app.log.error(err);
     process.exit(1);
   }
-  console.log(`Server listening on ${address}`);
+  console.log(`[Server] Listening on ${address}`);
 });
