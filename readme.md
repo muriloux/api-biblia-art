@@ -1,7 +1,7 @@
 ## Run
-- `npm install`
-- `npm build`
-- `npm start`
+- `npm run install`
+- `npm run build`
+- `npm run start`
 
 ## Endpoints
 
