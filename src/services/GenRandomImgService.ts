@@ -13,7 +13,7 @@ export default class GenRandomImgService {
       "..",
       "..",
       "image",
-      "image.webp"
+      "image.jpg"
     );
     this.outputImgPath = path.resolve(
       __dirname,
@@ -25,9 +25,11 @@ export default class GenRandomImgService {
   }
 
   execute(text?: string) {
+    console.time("Generation time");
     try {
       this.text = text ? text : "Hello God";
-      console.log("Generating Image...");
+      console.log("[GenRandomImgService] Generating image...");
+
       const image = sharp(this.inputImgPath);
 
       image.metadata().then((metadata) => {
@@ -39,21 +41,22 @@ export default class GenRandomImgService {
           .composite([
             {
               input: Buffer.from(`
-                <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
-                 <text x="50%" y="50%" text-anchor="middle" font-family="Arial" font-size="${
-                   (width as number) / 10
-                 }" fill="black">
-                    ${this.text}
-                  </text>
-                </svg>
-                `),
+            <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+            <text x="50%" y="50%" text-anchor="middle" font-family="Arial" font-size="${
+              (width as number) / 10
+            }" fill="black">
+            ${this.text}
+            </text>
+            </svg>
+            `),
               blend: "over",
             },
           ])
           .toFile(this.outputImgPath)
-          .then(() =>
-            console.log(`Text "${this.text}" added to image successfully.`)
-          )
+          .then(() => {
+            console.log(`[GenRandomImgService] Image generated successfully.`);
+            console.timeEnd("Generation time");
+          })
           .catch((error) =>
             console.error(`Error adding text to image: ${error}`)
           );

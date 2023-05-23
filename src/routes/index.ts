@@ -1,5 +1,3 @@
-// exampleRoutes.ts
-
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 
 import ImageController from "../controllers/ImageController";
