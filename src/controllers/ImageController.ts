@@ -1,13 +1,13 @@
-import GenRandomImgService from "../services/GenRandomImgService";
+import GenImgService from "../services/GenImgService";
 
-const genRandomImgService = new GenRandomImgService();
+const genImgService = new GenImgService();
 
 export default class ImageController {
   async getRandomImage() {
-    genRandomImgService.execute();
+    genImgService.execute();
   }
 
   async getImageFromText(text: string) {
-    genRandomImgService.execute(text);
+    genImgService.execute(text);
   }
 }
